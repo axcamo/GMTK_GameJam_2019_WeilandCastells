@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float bulletTimeDuration;
     public float bulletSpeed;
 
+    private float targetFov;
     private bool onBulletTime;
     private float bulletTimeCounter;
     private bool canAttack;
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
     PlayerControls playerControls;
     CharacterController controller;
     Vector2 mouseDelta;
+
+    [SerializeField] public CinemachineVirtualCamera cam;
 
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject bulletPrefab;
@@ -27,7 +31,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
+        targetFov = 40;
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
 
@@ -57,6 +61,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, targetFov, Time.unscaledDeltaTime * 10);
+
         if (onBulletTime)
         {
             if (bulletTimeCounter > 0)
@@ -122,14 +128,13 @@ public class PlayerController : MonoBehaviour
             Die();
         else
         {
-            Debug.Log("Damaged");
-
             EnableBulletTime();
         }
     }
 
     void EnableBulletTime()
     {
+        targetFov = 60;
         bulletTimeCounter = bulletTimeDuration;
         canAttack = true;
         onBulletTime = true;
@@ -141,6 +146,7 @@ public class PlayerController : MonoBehaviour
         if (canAttack)
             Die();
 
+        targetFov = 40;
         canAttack = false;
         onBulletTime = false;
         Time.timeScale = 1f;

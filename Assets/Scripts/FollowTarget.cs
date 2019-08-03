@@ -25,10 +25,8 @@ public class FollowTarget : MonoBehaviour
     //}
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Aleeeerta!");
         if(other.transform.tag == "PlayerBullet")
         {
-            Debug.Log("Enemy Destroyed!");
             Destroy(gameObject);
         }
     }
