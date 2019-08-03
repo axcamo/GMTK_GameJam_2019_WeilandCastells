@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6385371209767905094}
   - component: {fileID: 8308392926233924073}
   - component: {fileID: 4730638573362903408}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4927,6 +4927,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 93f4785c26944c44da830159dd2dfd54,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 93f4785c26944c44da830159dd2dfd54,
         type: 3}
