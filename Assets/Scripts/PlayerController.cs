@@ -5,12 +5,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private bool canAttack;
     public float speedMagnitude;
     public float cameraSpeed;
+    public float bulletTimeDuration;
     Vector2 moveVector;
     PlayerControls playerControls;
     CharacterController controller;
     Vector2 mouseDelta;
+
+    
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,6 +41,48 @@ public class PlayerController : MonoBehaviour
         //Camera.main.transform.Rotate(new Vector3(mouseDelta.y, mouseDelta.x, 0));
         //transform.Translate(new Vector3(moveVector.x, 0, moveVector.y) * speedMagnitude);
         controller.SimpleMove((Camera.main.transform.forward * moveVector.y + Camera.main.transform.right * moveVector.x) * speedMagnitude);
+    }
+
+    IEnumerator BulletTimeCoroutine()
+    {
+        EnableBulletTime();
+        yield return new WaitForSeconds(bulletTimeDuration);
+        canAttack = false;
+        DisableBulletTime();
+    }
+
+    void Die()
+    {
+
+    }
+
+    void Damage()
+    {
+        if (canAttack)
+            Die();
+        else
+        {
+            canAttack = true;
+            StartCoroutine(BulletTimeCoroutine());
+        }
+    }
+
+    void EnableBulletTime()
+    {
+        Time.timeScale = 0.2f;
+    }
+
+    void DisableBulletTime()
+    {
+        Time.timeScale = 1f;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "EnemyBullet")
+        {
+            Damage();
+        }
     }
 
     void OnEnable()
