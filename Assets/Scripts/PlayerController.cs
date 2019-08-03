@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(bulletTimeCounter);
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //if(canAttack)
+            if(canAttack)
                 Shoot();
         }
         if (Input.GetKeyDown(KeyCode.K))
@@ -106,8 +106,6 @@ public class PlayerController : MonoBehaviour
             b.tag = "PlayerBullet";
             b.transform.LookAt(hit.point);
             b.GetComponent<Bullet>().velocity = b.transform.forward * bulletSpeed;
-
-
         }
     }
 
