@@ -14,6 +14,25 @@ public class FollowTarget : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    Debug.Log("Aleeeerta!");
+    //    if (other.transform.tag == "PlayerBullet")
+    //    {
+    //        Debug.Log("Enemy Destroyed!");
+    //        Destroy(gameObject);
+    //    }
+    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Aleeeerta!");
+        if(other.transform.tag == "PlayerBullet")
+        {
+            Debug.Log("Enemy Destroyed!");
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate()
     {
         agent.destination = target.position;

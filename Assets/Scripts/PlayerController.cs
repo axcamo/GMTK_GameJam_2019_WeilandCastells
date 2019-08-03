@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
         {
             if (bulletTimeCounter > 0)
             {
-                Debug.Log("Counting: "+bulletTimeCounter);
                 bulletTimeCounter -= Time.unscaledDeltaTime;
             }
             else
@@ -149,13 +148,6 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "EnemyBullet")
-        {
-            Damage();
-        }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag == "EnemyBullet")
         {
             Damage();
         }
