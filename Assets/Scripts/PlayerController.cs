@@ -82,9 +82,15 @@ public class PlayerController : MonoBehaviour
             Damage();
         }
         //Camera
-        Camera.main.transform.Rotate(0f, mouseDelta.x * cameraSpeed, 0f, Space.World);
-        Camera.main.transform.Rotate(-mouseDelta.y * cameraSpeed, 0f, 0f, Space.Self);
+        float pitch = mouseDelta.x * cameraSpeed * Time.unscaledDeltaTime;
+        float yaw = -mouseDelta.y * cameraSpeed * Time.unscaledDeltaTime;
 
+        Debug.Log("Camera Motion: X:" + pitch + " Y:" + yaw);
+
+        Camera.main.transform.Rotate(0f, pitch, 0f, Space.World);
+        Camera.main.transform.Rotate(yaw, 0f, 0f, Space.Self);
+
+        
         //Camera.main.transform.Rotate(new Vector3(mouseDelta.y, mouseDelta.x, 0));
         //transform.Translate(new Vector3(moveVector.x, 0, moveVector.y) * speedMagnitude);
         controller.SimpleMove((Camera.main.transform.forward * moveVector.y + Camera.main.transform.right * moveVector.x) * speedMagnitude);
