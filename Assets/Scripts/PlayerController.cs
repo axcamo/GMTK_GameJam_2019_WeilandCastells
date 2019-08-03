@@ -35,9 +35,9 @@ public class PlayerController : MonoBehaviour
         playerControls.Movement.Move.canceled += ctx => moveVector = Vector2.zero;
         playerControls.Movement.Move.Enable();
 
-        playerControls.Movement.RotateCamera.performed += ctx => { mouseDelta = ctx.ReadValue<Vector2>(); };
-        playerControls.Movement.RotateCamera.canceled += ctx => { mouseDelta = Vector2.zero; };
-        playerControls.Movement.RotateCamera.Enable();
+        //playerControls.Movement.RotateCamera.performed += ctx => { mouseDelta = ctx.ReadValue<Vector2>(); };
+        //playerControls.Movement.RotateCamera.canceled += ctx => { mouseDelta = Vector2.zero; };
+        //playerControls.Movement.RotateCamera.Enable();
     }
 
     private void Start()
@@ -82,13 +82,13 @@ public class PlayerController : MonoBehaviour
             Damage();
         }
         //Camera
-        float pitch = mouseDelta.x * cameraSpeed * Time.unscaledDeltaTime;
-        float yaw = -mouseDelta.y * cameraSpeed * Time.unscaledDeltaTime;
+        //float pitch = mouseDelta.x * cameraSpeed * Time.unscaledDeltaTime;
+        //float yaw = -mouseDelta.y * cameraSpeed * Time.unscaledDeltaTime;
 
-        Debug.Log("Camera Motion: X:" + pitch + " Y:" + yaw);
+        //Debug.Log("Camera Motion: X:" + pitch + " Y:" + yaw);
 
-        Camera.main.transform.Rotate(0f, pitch, 0f, Space.World);
-        Camera.main.transform.Rotate(yaw, 0f, 0f, Space.Self);
+        //Camera.main.transform.Rotate(0f, pitch, 0f, Space.World);
+        //Camera.main.transform.Rotate(yaw, 0f, 0f, Space.Self);
 
         
         //Camera.main.transform.Rotate(new Vector3(mouseDelta.y, mouseDelta.x, 0));
