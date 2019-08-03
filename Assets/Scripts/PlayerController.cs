@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speedMagnitude;
+    public float cameraSpeed;
     Vector2 moveVector;
     PlayerControls playerControls;
     CharacterController controller;
@@ -20,16 +21,21 @@ public class PlayerController : MonoBehaviour
         playerControls.Movement.Move.canceled += ctx => moveVector = Vector2.zero;
         playerControls.Movement.Move.Enable();
 
-        playerControls.Camera.Rotate.performed += ctx => { mouseDelta = ctx.ReadValue<Vector2>(); };
-        playerControls.Camera.Rotate.Enable();
+        playerControls.Movement.RotateCamera.performed += ctx => { Debug.Log("MouseX"); mouseDelta = ctx.ReadValue<Vector2>(); };
+        playerControls.Movement.RotateCamera.canceled += ctx => { Debug.Log("MouseY"); mouseDelta = Vector2.zero; };
+        playerControls.Movement.RotateCamera.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Camera.main.transform.Rotate(mouseDelta, 10);
+        //Camera
+        Camera.main.transform.Rotate(0f, mouseDelta.x * cameraSpeed, 0f, Space.World);
+        Camera.main.transform.Rotate(-mouseDelta.y * cameraSpeed, 0f, 0f, Space.Self);
+
+        //Camera.main.transform.Rotate(new Vector3(mouseDelta.y, mouseDelta.x, 0));
         //transform.Translate(new Vector3(moveVector.x, 0, moveVector.y) * speedMagnitude);
-        controller.SimpleMove(new Vector3(moveVector.x, 0, moveVector.y) * speedMagnitude);
+        controller.SimpleMove((Camera.main.transform.forward * moveVector.y + Camera.main.transform.right * moveVector.x) * speedMagnitude);
     }
 
     void OnEnable()
