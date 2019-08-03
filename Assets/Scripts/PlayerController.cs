@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speedMagnitude;
     public float cameraSpeed;
     public float bulletTimeDuration;
+    public float bulletSpeed;
 
     private bool onBulletTime;
     private float bulletTimeCounter;
@@ -17,6 +18,9 @@ public class PlayerController : MonoBehaviour
     PlayerControls playerControls;
     CharacterController controller;
     Vector2 mouseDelta;
+
+    [SerializeField] private GameObject weapon;
+    [SerializeField] private GameObject bulletPrefab;
 
     public RectTransform bulletTimeBar;
     
@@ -68,6 +72,11 @@ public class PlayerController : MonoBehaviour
         }
 
         //Debug.Log(bulletTimeCounter);
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            //if(canAttack)
+                Shoot();
+        }
         if (Input.GetKeyDown(KeyCode.K))
         {
             Damage();
@@ -86,6 +95,20 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
 
+    }
+
+    void Shoot()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+        {
+            GameObject b = Instantiate(bulletPrefab, weapon.transform.position, weapon.transform.rotation) as GameObject;
+            b.tag = "PlayerBullet";
+            b.transform.LookAt(hit.point);
+            b.GetComponent<Bullet>().velocity = b.transform.forward * bulletSpeed;
+
+
+        }
     }
 
     void Damage()
