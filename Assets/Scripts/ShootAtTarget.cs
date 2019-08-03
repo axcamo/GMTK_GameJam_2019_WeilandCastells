@@ -10,9 +10,14 @@ public class ShootAtTarget : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     [SerializeField] private Transform bulletExit;
     [SerializeField] private Transform bulletParent;
-    [SerializeField] private Transform target;
 
+    private FollowTarget followComponent;
     private float timer;
+
+    private void Start()
+    {
+        followComponent = GetComponent<FollowTarget>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,15 +33,24 @@ public class ShootAtTarget : MonoBehaviour
 
     void Shoot()
     {
+        StartCoroutine("SlowDown", ratio*2);
         GameObject b = Instantiate(bulletPrefab, bulletExit.position, transform.rotation, bulletParent);
         b.GetComponent<Bullet>().velocity = transform.forward * bulletSpeed;
     }
 
     bool CheckIfLookingAtTarget()
     {
-        float a = Vector3.Angle(target.position - transform.position, transform.forward);
+        float a = Vector3.Angle(followComponent.target.position - transform.position, transform.forward);
 
         if (a <= shootAngleTolerance) return true;
         else return false;
+    }
+
+    IEnumerator SlowDown(float duration)
+    {
+        float defaultSpeed = followComponent.GetNavMeshAgent().speed;
+        followComponent.GetNavMeshAgent().speed = 0;
+        yield return new WaitForSeconds(duration);
+        followComponent.GetNavMeshAgent().speed = defaultSpeed;
     }
 }

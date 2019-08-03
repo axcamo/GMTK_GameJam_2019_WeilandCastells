@@ -238,8 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3956744144284958299, guid: 53fd9c9525b92464f8e8fd06c24b3639,
     type: 3}
-  ratio: 0.5
-  shootAngleTolerance: 20
+  ratio: 1
+  shootAngleTolerance: 10
   bulletSpeed: 30
   bulletExit: {fileID: 2017398565265178565}
   bulletParent: {fileID: 0}

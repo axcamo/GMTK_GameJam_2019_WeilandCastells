@@ -8,7 +8,6 @@ public class EnterAreaTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Bla");
         if (other.CompareTag("Player"))
         {
             EnableEnemies();

@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public class FollowTarget : MonoBehaviour
 {
-    [SerializeField]
-    private Transform target;
+    public Transform target;
     private NavMeshAgent agent;
 
     private void Start()
@@ -18,4 +17,11 @@ public class FollowTarget : MonoBehaviour
     {
         agent.destination = target.position;
     }
+
+    public void SlowDown(float duration)
+    {
+
+    }
+
+    public NavMeshAgent GetNavMeshAgent() { return agent; }
 }
