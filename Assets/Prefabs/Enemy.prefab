@@ -243,4 +243,3 @@ MonoBehaviour:
   bulletSpeed: 30
   bulletExit: {fileID: 2017398565265178565}
   bulletParent: {fileID: 0}
-  target: {fileID: 0}

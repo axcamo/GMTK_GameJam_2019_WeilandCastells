@@ -11,6 +11,7 @@ public class FollowTarget : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void FixedUpdate()

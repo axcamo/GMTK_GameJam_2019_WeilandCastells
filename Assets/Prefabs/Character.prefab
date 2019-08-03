@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 8296997278627219894}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   speedMagnitude: 10
   cameraSpeed: 1
   bulletTimeDuration: 3
-  bulletSpeed: 0
+  bulletSpeed: 30
   weapon: {fileID: 2169973615912878486}
   bulletPrefab: {fileID: 3956744144284958299, guid: 53fd9c9525b92464f8e8fd06c24b3639,
     type: 3}

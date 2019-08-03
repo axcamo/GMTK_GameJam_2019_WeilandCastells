@@ -106,6 +106,8 @@ public class PlayerController : MonoBehaviour
             b.tag = "PlayerBullet";
             b.transform.LookAt(hit.point);
             b.GetComponent<Bullet>().velocity = b.transform.forward * bulletSpeed;
+
+            canAttack = false;
         }
     }
 
@@ -138,7 +140,13 @@ public class PlayerController : MonoBehaviour
         onBulletTime = false;
         Time.timeScale = 1f;
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "EnemyBullet")
+        {
+            Damage();
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "EnemyBullet")

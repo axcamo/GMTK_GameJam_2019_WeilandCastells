@@ -35,6 +35,7 @@ public class ShootAtTarget : MonoBehaviour
     {
         StartCoroutine("SlowDown", ratio*2);
         GameObject b = Instantiate(bulletPrefab, bulletExit.position, transform.rotation, bulletParent);
+        b.tag = "EnemyBullet";
         b.GetComponent<Bullet>().velocity = transform.forward * bulletSpeed;
     }
 
