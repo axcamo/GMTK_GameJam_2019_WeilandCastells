@@ -232,6 +232,7 @@ MonoBehaviour:
   cameraSpeed: 0.1
   bulletTimeDuration: 3
   bulletSpeed: 30
+  cam: {fileID: 0}
   weapon: {fileID: 2169973615912878486}
   bulletPrefab: {fileID: 577507820347246408, guid: 960d1d29b69591e45b043f14f2bd7251,
     type: 3}

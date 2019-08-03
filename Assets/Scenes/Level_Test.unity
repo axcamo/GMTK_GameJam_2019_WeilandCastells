@@ -3806,6 +3806,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8296997278627219889, guid: 4ef2826d2853fe14d88306d24753126a,
         type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 281155897}
+    - target: {fileID: 8296997278627219889, guid: 4ef2826d2853fe14d88306d24753126a,
+        type: 3}
       propertyPath: bulletTimeBar
       value: 
       objectReference: {fileID: 1364323149}
