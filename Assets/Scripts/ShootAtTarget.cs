@@ -8,15 +8,17 @@ public class ShootAtTarget : MonoBehaviour
     [SerializeField] private float ratio;
     [SerializeField] private float shootAngleTolerance;
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private Transform bulletExit;
+    [SerializeField] private Transform weapon;
     [SerializeField] private Transform bulletParent;
 
     private FollowTarget followComponent;
+    private AudioSource shotSound;
     private float timer;
 
     private void Start()
     {
         followComponent = GetComponent<FollowTarget>();
+        shotSound = weapon.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -34,8 +36,11 @@ public class ShootAtTarget : MonoBehaviour
     void Shoot()
     {
         StartCoroutine("SlowDown", ratio*2);
-        GameObject b = Instantiate(bulletPrefab, bulletExit.position, transform.rotation, bulletParent);
+        GameObject b = Instantiate(bulletPrefab, weapon.position, transform.rotation, bulletParent);
         b.GetComponent<Bullet>().velocity = transform.forward * bulletSpeed;
+        shotSound.volume = Random.Range(0.5f, 1.0f);
+        shotSound.pitch = Random.Range(0.8f, 1.2f);
+        shotSound.Play();
     }
 
     bool CheckIfLookingAtTarget()

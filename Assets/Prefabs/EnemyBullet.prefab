@@ -95,6 +95,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: EnemyBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 8308392926233924073, guid: 53fd9c9525b92464f8e8fd06c24b3639,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6a69ce500fde774e84361196428c119, type: 2}
+    - target: {fileID: 4730638573362903408, guid: 53fd9c9525b92464f8e8fd06c24b3639,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6a69ce500fde774e84361196428c119, type: 2}
     - target: {fileID: 3956744144284958297, guid: 53fd9c9525b92464f8e8fd06c24b3639,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -150,6 +160,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3449511818663341521, guid: 53fd9c9525b92464f8e8fd06c24b3639,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53dbb782f43a84440a22db908966b30a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53fd9c9525b92464f8e8fd06c24b3639, type: 3}
 --- !u!4 &6878482714830282098 stripped
