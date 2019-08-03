@@ -3760,11 +3760,6 @@ PrefabInstance:
       propertyPath: bulletTimeBar
       value: 
       objectReference: {fileID: 1364323149}
-    - target: {fileID: 8296997278627219889, guid: 4ef2826d2853fe14d88306d24753126a,
-        type: 3}
-      propertyPath: cameraSpeed
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef2826d2853fe14d88306d24753126a, type: 3}
 --- !u!1001 &1029776976
@@ -7063,26 +7058,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027946560}
   m_Mesh: {fileID: 1952512615}
---- !u!1 &2078627867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8296997278627219848, guid: 4ef2826d2853fe14d88306d24753126a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1019877961}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &2078627868
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078627867}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2078627874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8296997278627219891, guid: 4ef2826d2853fe14d88306d24753126a,
@@ -7559,6 +7534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: field of view
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320995149496792614, guid: a5851aef68725374ea56abc7314ba453,
+        type: 3}
+      propertyPath: m_IgnoreTimeScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5851aef68725374ea56abc7314ba453, type: 3}
