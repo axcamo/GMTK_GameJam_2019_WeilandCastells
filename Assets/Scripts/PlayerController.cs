@@ -108,7 +108,6 @@ public class PlayerController : MonoBehaviour
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
         {
             GameObject b = Instantiate(bulletPrefab, weapon.transform.position, weapon.transform.rotation) as GameObject;
-            b.tag = "PlayerBullet";
             b.transform.LookAt(hit.point);
             b.GetComponent<Bullet>().velocity = b.transform.forward * bulletSpeed;
 
