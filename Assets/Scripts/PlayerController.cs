@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
     void Damage()
     {
         if (canAttack)
-            Die();
+            GameSystem.Instance.GameOverDelegate();
         else
         {
             EnableBulletTime();
@@ -194,6 +194,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.transform.tag == "EnemyBullet")
         {
+            Destroy(other.transform.gameObject);
+            Debug.Log("Ouch!");
             Damage();
         }
     }
