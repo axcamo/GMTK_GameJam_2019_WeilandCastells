@@ -31,7 +31,7 @@ public class FollowTarget : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         agent.destination = target.position;
     }
