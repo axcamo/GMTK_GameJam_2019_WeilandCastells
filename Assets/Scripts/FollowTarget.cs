@@ -28,6 +28,7 @@ public class FollowTarget : MonoBehaviour
         if(other.transform.tag == "PlayerBullet")
         {
             Destroy(gameObject);
+            SpawnManager.instance.DecreaseEnemyCount();
         }
     }
 

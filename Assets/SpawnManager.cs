@@ -10,8 +10,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int minSpawnEnemies = 5;
     [SerializeField] private int maxSpawnEnemies = 10;
     [SerializeField] private float secondsBetweenWaves = 10;
+    [SerializeField] private int maxTotalEnemies = 10;
 
     public static SpawnManager instance;
+    private int enemyCount = 0;
 
     public void Awake() { if (instance == null) instance = this; }
 
@@ -42,7 +44,12 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnOne()
     {
+        if (enemyCount >= maxTotalEnemies) return;
         int sp = Random.Range(0, spawnPoints.Length - 1);
         GameObject go = Instantiate(enemyPrefab, spawnPoints[sp].transform.position, Quaternion.identity);
+        IncreaseEnemyCount();
     }
+
+    public void IncreaseEnemyCount() { enemyCount++; }
+    public void DecreaseEnemyCount() { enemyCount--; }
 }
