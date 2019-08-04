@@ -10,6 +10,7 @@ public class ShootAtTarget : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     [SerializeField] private Transform weapon;
     [SerializeField] private Transform bulletParent;
+    [SerializeField] private Animator animator;
 
     private FollowTarget followComponent;
     private AudioSource shotSound;
@@ -36,6 +37,7 @@ public class ShootAtTarget : MonoBehaviour
     void Shoot()
     {
         StartCoroutine("SlowDown", ratio*2);
+        animator.SetTrigger("Shoot");
         GameObject b = Instantiate(bulletPrefab, weapon.position, transform.rotation, bulletParent);
         b.GetComponent<Bullet>().velocity = transform.forward * bulletSpeed;
         shotSound.volume = Random.Range(0.5f, 1.0f);
