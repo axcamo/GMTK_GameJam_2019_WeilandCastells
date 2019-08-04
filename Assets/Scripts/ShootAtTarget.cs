@@ -47,7 +47,9 @@ public class ShootAtTarget : MonoBehaviour
 
     bool CheckIfLookingAtTarget()
     {
-        float a = Vector3.Angle(followComponent.target.position - transform.position, transform.forward);
+        Vector3 t = followComponent.target.position; t.y = 0;
+        Vector3 me = transform.position;    me.y = 0;
+        float a = Vector3.Angle(t - me, transform.forward);
 
         if (a <= shootAngleTolerance) return true;
         else return false;
