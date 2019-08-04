@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject gameCanvas;
     [SerializeField] private GameObject menuCanvas;
+    [SerializeField] private GameObject gameOverCanvas;
 
     [SerializeField] private CinemachineVirtualCamera gameCamera;
     [SerializeField] private CinemachineVirtualCamera menuCamera;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        GameSystem.Instance.GameOverDelegate += Die;
         canAttack = false;
         onBulletTime = false;
         bulletTimeCounter = 0;
@@ -113,10 +115,6 @@ public class PlayerController : MonoBehaviour
                         if (canAttack)
                             Shoot();
                     }
-                    //if (Input.GetKeyDown(KeyCode.K))
-                    //{
-                    //    Damage();
-                    //}
 
                     controller.SimpleMove((Camera.main.transform.forward * moveVector.y + Camera.main.transform.right * moveVector.x) * speedMagnitude);
 
@@ -137,7 +135,10 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-
+        playerControls.Movement.Move.Disable();
+        gameCanvas.SetActive(false);
+        gameOverCanvas.SetActive(true);
+        state = GameState.OVER;
     }
 
     void Shoot()
