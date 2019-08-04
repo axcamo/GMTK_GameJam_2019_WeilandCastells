@@ -29,6 +29,7 @@ public class FollowTarget : MonoBehaviour
         {
             Destroy(gameObject);
             SpawnManager.instance.DecreaseEnemyCount();
+            Score.instance.IncreaseScore();
         }
     }
 
