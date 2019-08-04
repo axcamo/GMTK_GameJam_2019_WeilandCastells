@@ -16,4 +16,9 @@ public class Bullet : MonoBehaviour
     {
         transform.position += velocity * Time.deltaTime;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 8) Destroy(this.gameObject);   // 8 = Level.
+    }
 }

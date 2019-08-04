@@ -339,7 +339,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6878482714830282096, guid: e9c219b31ae32634baf2f19bb3eb3d9f,
     type: 3}
   ratio: 1
-  shootAngleTolerance: 10
+  shootAngleTolerance: 5
   bulletSpeed: 30
   weapon: {fileID: 2017398565265178565}
   bulletParent: {fileID: 0}
