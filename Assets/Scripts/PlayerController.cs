@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
         menuCamera.Priority = 0;
         gameCanvas.SetActive(true);
         menuCanvas.SetActive(false);
-        SpawnManager.instance.StartSpawning();
     }
 
     void EditBulletTimeBar()
