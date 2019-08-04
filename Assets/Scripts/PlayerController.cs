@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.Rendering.PostProcessing;
+
+enum GameState { MENU, GAME, OVER }
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float bulletTimeDuration;
     public float bulletSpeed;
 
+    private GameState state;
     private float targetFov;
     private bool onBulletTime;
     private float bulletTimeCounter;
@@ -26,18 +30,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject bulletPrefab;
 
+    [SerializeField] private GameObject gameCanvas;
+    [SerializeField] private GameObject menuCanvas;
+
+    [SerializeField] private CinemachineVirtualCamera gameCamera;
+    [SerializeField] private CinemachineVirtualCamera menuCamera;
+
     public RectTransform bulletTimeBar;
-    
+
+    public PostProcessProfile postProcessProfile;
+
     // Start is called before the first frame update
     void Awake()
     {
+        state = GameState.MENU;
         targetFov = 40;
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
 
         playerControls.Movement.Move.performed += ctx => { moveVector = ctx.ReadValue<Vector2>(); };
         playerControls.Movement.Move.canceled += ctx => moveVector = Vector2.zero;
-        playerControls.Movement.Move.Enable();
+        
 
         //playerControls.Movement.RotateCamera.performed += ctx => { mouseDelta = ctx.ReadValue<Vector2>(); };
         //playerControls.Movement.RotateCamera.canceled += ctx => { mouseDelta = Vector2.zero; };
@@ -51,6 +64,16 @@ public class PlayerController : MonoBehaviour
         bulletTimeCounter = 0;
     }
 
+    public void StartGame()
+    {
+        state = GameState.GAME;
+        playerControls.Movement.Move.Enable();
+
+        menuCamera.Priority = 0;
+        gameCanvas.SetActive(true);
+        menuCanvas.SetActive(false);
+    }
+
     void EditBulletTimeBar()
     {
         // min = 498
@@ -61,46 +84,55 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, targetFov, Time.unscaledDeltaTime * 10);
-
-        if (onBulletTime)
+        switch (state)
         {
-            if (bulletTimeCounter > 0)
-            {
-                bulletTimeCounter -= Time.unscaledDeltaTime;
-            }
-            else
-            {
-                bulletTimeCounter = 0;
-                DisableBulletTime();
-            }
-        }
+            case GameState.MENU:
+                {
 
-        //Debug.Log(bulletTimeCounter);
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if(canAttack)
-                Shoot();
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Damage();
-        }
-        //Camera
-        //float pitch = mouseDelta.x * cameraSpeed * Time.unscaledDeltaTime;
-        //float yaw = -mouseDelta.y * cameraSpeed * Time.unscaledDeltaTime;
+                }
+                break;
+            case GameState.GAME:
+                {
+                    cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, targetFov, Time.unscaledDeltaTime * 10);
 
-        //Debug.Log("Camera Motion: X:" + pitch + " Y:" + yaw);
+                    if (onBulletTime)
+                    {
+                        if (bulletTimeCounter > 0)
+                        {
+                            bulletTimeCounter -= Time.unscaledDeltaTime;
+                        }
+                        else
+                        {
+                            bulletTimeCounter = 0;
+                            DisableBulletTime();
+                        }
+                    }
 
-        //Camera.main.transform.Rotate(0f, pitch, 0f, Space.World);
-        //Camera.main.transform.Rotate(yaw, 0f, 0f, Space.Self);
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        if (canAttack)
+                            Shoot();
+                    }
+                    //if (Input.GetKeyDown(KeyCode.K))
+                    //{
+                    //    Damage();
+                    //}
+
+                    controller.SimpleMove((Camera.main.transform.forward * moveVector.y + Camera.main.transform.right * moveVector.x) * speedMagnitude);
+
+                    EditBulletTimeBar();
+                }
+                break;
+            case GameState.OVER:
+                {
+
+                }
+                break;
+            default:
+                break;
+        }
 
         
-        //Camera.main.transform.Rotate(new Vector3(mouseDelta.y, mouseDelta.x, 0));
-        //transform.Translate(new Vector3(moveVector.x, 0, moveVector.y) * speedMagnitude);
-        controller.SimpleMove((Camera.main.transform.forward * moveVector.y + Camera.main.transform.right * moveVector.x) * speedMagnitude);
-
-        EditBulletTimeBar();
     }
 
     void Die()
@@ -137,6 +169,7 @@ public class PlayerController : MonoBehaviour
 
     void EnableBulletTime()
     {
+        postProcessProfile.GetSetting<ChromaticAberration>().active = true;
         targetFov = 60;
         bulletTimeCounter = bulletTimeDuration;
         canAttack = true;
@@ -149,6 +182,7 @@ public class PlayerController : MonoBehaviour
         if (canAttack)
             Die();
 
+        postProcessProfile.GetSetting<ChromaticAberration>().active = false;
         targetFov = 40;
         canAttack = false;
         onBulletTime = false;
