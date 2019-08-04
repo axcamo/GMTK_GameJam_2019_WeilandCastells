@@ -212,7 +212,7 @@ CharacterController:
   m_Height: 3.5
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.6
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -236,6 +236,10 @@ MonoBehaviour:
   weapon: {fileID: 2169973615912878486}
   bulletPrefab: {fileID: 577507820347246408, guid: 960d1d29b69591e45b043f14f2bd7251,
     type: 3}
+  gameCanvas: {fileID: 0}
+  menuCanvas: {fileID: 0}
+  gameCamera: {fileID: 0}
+  menuCamera: {fileID: 0}
   bulletTimeBar: {fileID: 0}
   postProcessProfile: {fileID: 11400000, guid: b0dff78afcc01ee4996b0aa3028b995c, type: 2}
 --- !u!114 &8296997278627219894
